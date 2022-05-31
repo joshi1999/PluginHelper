@@ -7,6 +7,15 @@
     <groupId>de.joshi1999.pluginhelper</groupId>
     <artifactId>PluginHelper</artifactId>
     <version>0.1-SNAPSHOT</version>
+         
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub OWNER Apache Maven Packages</name>
+            <url>https://maven.pkg.github.com/OWNER/REPOSITORY</url>
+        </repository>
+    </distributionManagement>
+
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
