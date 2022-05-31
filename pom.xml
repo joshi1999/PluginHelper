@@ -6,7 +6,7 @@
 
     <groupId>de.joshi1999.pluginhelper</groupId>
     <artifactId>PluginHelper</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
          
     <distributionManagement>
         <repository>
