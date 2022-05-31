@@ -8,13 +8,18 @@
     <artifactId>PluginHelper</artifactId>
     <version>0.0.1</version>
          
-    <distributionManagement>
-        <repository>
+    <profiles>
+        <profile>
             <id>github</id>
-            <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/joshi1999/PluginHelper</url>
-        </repository>
-    </distributionManagement>
+            <distributionManagement>
+                <repository>
+                    <id>github</id>
+                    <name>GitHub OWNER Apache Maven Packages</name>
+                    <url>https://maven.pkg.github.com/joshi1999/PluginHelper</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 
 
     <properties>
