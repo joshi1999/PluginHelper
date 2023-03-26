@@ -17,7 +17,7 @@ public class ImprovedPlugin extends Plugin {
 
     /**
      * A prepared {@code Configuration} for the plugin, which is found in the plugin folder.
-     * @return config of the
+     * @return the configuration
      */
     public Configuration getConfig() {
         return config;
