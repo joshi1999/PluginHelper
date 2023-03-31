@@ -36,7 +36,6 @@ public abstract class Command extends net.md_5.bungee.api.plugin.Command {
    * @param plugin plugin which is using this command
    * @param name   name of the command
    */
-  @SuppressWarnings("unused")
   public Command(@NotNull ImprovedPlugin plugin, @NotNull String name) {
     super(name);
     this.plugin = plugin;
@@ -51,14 +50,12 @@ public abstract class Command extends net.md_5.bungee.api.plugin.Command {
    * @param sender      The sender of the command
    * @param args        String[] of arguments
    * @param commandName name of the subcommand which should be executed
-   * @return true if the command was executed successfully by each invoked method
    */
   @SuppressWarnings("unused")
-  public final boolean executeCommand(@NotNull CommandSender sender, @NotNull String[] args,
+  public final void executeCommand(@NotNull CommandSender sender, @NotNull String[] args,
       @NotNull String commandName) {
-    boolean result = true;
     int count = 0;
-    for (Method method : getClass().getMethods()) {
+    for (Method method : getClass().getDeclaredMethods()) {
       if (!method.isAnnotationPresent(CommandExecutor.class)) {
         continue;
       }
@@ -68,11 +65,8 @@ public abstract class Command extends net.md_5.bungee.api.plugin.Command {
         continue;
       }
       try {
-        if (method.getReturnType() != boolean.class) {
-          throw new RuntimeException("Command processing method must return boolean.");
-        }
 
-        if (method.getAnnotation(CommandExecutor.class).console() && !(sender instanceof
+        if (!method.getAnnotation(CommandExecutor.class).console() && !(sender instanceof
             net.md_5.bungee.api.connection.ProxiedPlayer)) {
           if (!method.getAnnotation(CommandExecutor.class).noConsoleMessage().isEmpty()) {
             String configPath = method.getAnnotation(CommandExecutor.class).noConsoleMessage();
@@ -104,10 +98,8 @@ public abstract class Command extends net.md_5.bungee.api.plugin.Command {
           }
         }
 
-        boolean b = (boolean) method.invoke(this, sender, args);
-        if (!b) {
-          result = false;
-        }
+        method.setAccessible(true);
+        method.invoke(this, sender, args);
 
         if (!method.getAnnotation(CommandExecutor.class).afterExecuteMessage().isEmpty()) {
           String configPath = method.getAnnotation(CommandExecutor.class).afterExecuteMessage();
@@ -122,8 +114,6 @@ public abstract class Command extends net.md_5.bungee.api.plugin.Command {
     if (count == 0) {
       throw new RuntimeException("No command processing method found.");
     }
-
-    return result;
   }
 
   /**
