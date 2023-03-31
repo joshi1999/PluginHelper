@@ -15,7 +15,7 @@ public abstract class ImprovedPlugin extends Plugin {
   @Override
   public final void onLoad() {
     configurationManager = new ConfigurationManager(getDataFolder(), "config.yml", this);
-    config = configurationManager.load();
+    loadConfig();
 
     onPluginLoad();
   }
