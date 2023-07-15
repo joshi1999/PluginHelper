@@ -1,6 +1,6 @@
-package de.joshi1999.pluginhelper.config;
+package de.joshi1999.pluginhelper.bungeecord.config;
 
-import de.joshi1999.pluginhelper.ImprovedPlugin;
+import de.joshi1999.pluginhelper.bungeecord.ImprovedPlugin;
 import net.md_5.bungee.config.Configuration;
 import net.md_5.bungee.config.ConfigurationProvider;
 import net.md_5.bungee.config.YamlConfiguration;
@@ -48,6 +48,7 @@ public record ConfigurationManager(File dataFolder, String fileName, ImprovedPlu
      * it will be created.
      * @param config the configuration which shall be saved.
      */
+    @SuppressWarnings("unused")
     public void save(Configuration config) {
         try {
             if (!new File(dataFolder, fileName).getParentFile().exists()) {
